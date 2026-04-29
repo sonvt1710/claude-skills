@@ -92,6 +92,27 @@ Reference files for framework-specific skills must reflect the idiomatic best pr
 
 ---
 
+### Documentation Backlink
+
+Every `SKILL.md` MUST end with a single canonical Documentation link pointing back to the docs site:
+
+```
+[Documentation](https://jeffallan.github.io/claude-skills/skills/{domain}/{skill-name}/)
+```
+
+- `{domain}` is `metadata.domain` from the frontmatter (default `specialized` if absent — matches the fallback in `site/scripts/sync-content.mjs`).
+- `{skill-name}` is the skill's directory name.
+- Format is exactly markdown link syntax (`[text](url)`), not a bare URL. Strict CommonMark renderers do not auto-link bare URLs, and the line's purpose is to render as a real `<a href>` on aggregators (skills.sh, etc.) for SEO backlinks.
+
+**Why two surfaces, two behaviors:**
+
+- Aggregators consume raw `SKILL.md` from GitHub and render the line as a hyperlink. This is the SEO point.
+- The docs site itself would render this line as a self-link, which is redundant. `syncSkillPages` in `site/scripts/sync-content.mjs` strips the line at build time so the docs site, public markdown mirrors, `llms.txt`, and `llms-full.txt` never show it.
+
+**When adding or renaming a skill:** update both the directory name (which becomes `{skill-name}`) and the `metadata.domain` consistently with this URL formula, otherwise the backlink will 404.
+
+---
+
 ### Progressive Disclosure Architecture
 
 **Tier 1 - SKILL.md (~80-100 lines)**
@@ -119,8 +140,9 @@ Reference files for framework-specific skills must reflect the idiomatic best pr
 2. Write SKILL.md with capability + trigger description (no process steps)
 3. Create reference files for deep content (100+ lines)
 4. Add routing table linking topics to references
-5. Test skill triggers with realistic prompts
-6. Update SKILLS_GUIDE.md if adding new domain
+5. Append the canonical Documentation backlink as the last line (see Documentation Backlink above)
+6. Test skill triggers with realistic prompts
+7. Update SKILLS_GUIDE.md if adding new domain
 
 ### When Modifying Skills
 

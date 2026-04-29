@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.13] - 2026-04-28
+
+### Added
+- Canonical Documentation backlink at the bottom of every `SKILL.md` linking to the docs site (`[Documentation](https://jeffallan.github.io/claude-skills/skills/{domain}/{skill-name}/)`), so skill aggregators (skills.sh, etc.) that consume raw source markdown render a real `<a href>` backlink to the docs site for SEO. The docs build pipeline (`syncSkillPages` in `site/scripts/sync-content.mjs`) strips this line at build time, so the docs site, public markdown mirrors, `llms.txt`, and `llms-full.txt` render cleanly without self-references. Documented the convention in CLAUDE.md.
+
 ## [0.4.12] - 2026-04-21
 
 ### Added
@@ -437,6 +442,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Monitoring: Prometheus, Grafana, ELK, DataDog
 - Security: OWASP Top 10, SAST tools
 
+[0.4.13]: https://github.com/jeffallan/claude-skills/compare/v0.4.12...v0.4.13
 [0.4.12]: https://github.com/jeffallan/claude-skills/compare/v0.4.11...v0.4.12
 [0.4.11]: https://github.com/jeffallan/claude-skills/compare/v0.4.10...v0.4.11
 [0.4.10]: https://github.com/jeffallan/claude-skills/compare/v0.4.9...v0.4.10
